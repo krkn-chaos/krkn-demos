@@ -1,0 +1,58 @@
+ocp:
+  username: ""
+  password: ""
+  token: ""
+  api-url: ""
+aws:
+  access-key-id: test
+  secret-access-key: test
+  region: us-west-2
+scenarios:
+  wait-duration: 1
+  app-outage:
+    duration: 60
+    namespace: dittybopper
+    block-traffic: '[Ingress, Egress]'
+    pod-selector: '{app: dittybopper}'
+    check:
+      service-url: ""
+  node-outage:
+    action: node_stop_start_scenario
+    label-selector: 'node-role.kubernetes.io/master='
+    instance-count: 1
+    runs: 1
+    cloud-type: aws
+    duration: 60
+  pod-scenario:
+    namespace: dittybopper
+    pod-label: 'app=dittybopper'
+    disruption-count: 1
+    enable-alerts: 'true'
+    check-critical-alerts: 'true'
+    expected-recovery-time: 30
+  pvc-scenario:
+    pvc-name: prometheus-data-prometheus-k8s-0
+    pod-name: prometheus-k8s-0
+    namespace: openshift-monitoring
+    fill-percentage: 99
+    duration: 40
+    check:
+      container-name: prometheus
+      block-device: /dev/nvme2n1
+  service-hijacking:
+    plan-file: service_hijacking.yaml
+    service-target-port: 3000
+    service-name: dittybopper
+    namespace: dittybopper
+    duration: 10
+    check:
+      service-url: ""
+  zone-outage:
+    cloud-type: aws
+    duration: 50
+    vpc-id: vpc-051fc36b9e06a89b6
+    subnet-id: subnet-02acbec1471595d2e
+    region: us-west-2
+
+
+

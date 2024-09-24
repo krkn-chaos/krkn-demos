@@ -1,0 +1,35 @@
+# these settings are changed by the service_hijacking.sh script
+service_target_port: 3000
+service_name: dittybopper
+service_namespace: dittybopper
+image: quay.io/krkn-chaos/krkn-service-hijacking:v0.1.3
+chaos_duration: 30
+# these settings are changed by the service_hijacking.sh script
+
+
+plan:
+  - resource: "/"
+    steps:
+      GET:
+        - duration: 10
+          status: 200
+          mime_type: "application/json"
+          payload: |
+            {
+              "status":"First Step: Service Hijacked by Krkn"
+            }
+        - duration: 10
+          status: 401
+          mime_type: "application/json"
+          payload: |
+            {
+              "status":"Second step unauthorized by Krkn"
+            }
+      POST:
+        - duration: 30
+          status: 201
+          mime_type: "application/json"
+          payload: |
+            {
+              "status": "Also Post has been Hijacked by Krkn :-)"
+            }
