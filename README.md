@@ -15,6 +15,8 @@ There are three categories of scripts:
         - deploys in the cluster an example workload that can be targeted from different scenario (which settings are the default in the config.yaml)
 
 ## requirements 
+> [!WARNING]
+> These script are currently compatible with Linux. MacOs users need to modify podman commands adding each environment variable as an argument of the podman command since the `--env-host` option is not supported on this platform.
 
 To run these scripts, the following tools must be installed and available in the `$PATH`:
 
