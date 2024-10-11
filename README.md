@@ -17,6 +17,7 @@ There are three categories of scripts:
 ## requirements 
 > [!WARNING]
 > These script are currently compatible with Linux. MacOs users need to modify podman commands adding each environment variable as an argument of the podman command since the `--env-host` option is not supported on this platform.
+Few MacOS example scripts are available with the suffix macos_run*
 
 To run these scripts, the following tools must be installed and available in the `$PATH`:
 
