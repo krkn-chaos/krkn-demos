@@ -2,7 +2,7 @@
 source ../env.sh
 
 export NAMESPACE="$($YQ ".scenarios.pod-network-filter.namespace" $CONFIG)"
-export POD_LABEL="$($YQ ".scenarios.pod-network-filter.pod-label" $CONFIG)"
+export POD_SELECTOR="$($YQ ".scenarios.pod-network-filter.pod-selector" $CONFIG)"
 export INSTANCE_COUNT="$($YQ ".scenarios.pod-network-filter.instance-count" $CONFIG)"
 export ENABLE_ALERTS="$($YQ ".scenarios.pod-network-filter.enable-alerts" $CONFIG)"
 export CHECK_CRITICAL_ALERTS="$($YQ ".scenarios.pod-network-filter.check-critical-alerts" $CONFIG)"
@@ -16,7 +16,7 @@ export PROTOCOLS="$($YQ ".scenarios.pod-network-filter.protocols" $CONFIG)"
 $KRKNCTL run pod-network-filter \
     --kubeconfig "../kubeconfig" \
     --namespace "$NAMESPACE"  \
-    --pod-selector "$POD_LABEL"  \
+    --pod-selector "$POD_SELECTOR"  \
     --instance-count "$INSTANCE_COUNT" \
     --enable-alerts "$ENABLE_ALERTS" \
     --check-critical-alerts "$CHECK_CRITICAL_ALERTS" \
