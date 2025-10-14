@@ -1,5 +1,5 @@
 #!/bin/bash 
-source ./env.sh
+source ../env.sh
 
 export ACTION="$($YQ ".scenarios.node-outage.action" $CONFIG)"
 export LABEL_SELECTOR="$($YQ ".scenarios.node-outage.label-selector" $CONFIG)" 

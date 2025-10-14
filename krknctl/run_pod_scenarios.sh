@@ -1,5 +1,5 @@
 #!/bin/bash
-source ./env.sh
+source ../env.sh
 
 export NAMESPACE="$($YQ ".scenarios.pod-scenario.namespace" $CONFIG)"
 export POD_LABEL="$($YQ ".scenarios.pod-scenario.pod-label" $CONFIG)"

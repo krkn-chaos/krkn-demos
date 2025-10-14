@@ -1,5 +1,5 @@
 #!/bin/bash
-source ./env.sh
+source ../env.sh
 
 $PODMAN rm --ignore pvc-"$($YQ ".scenarios.pvc-scenario.pvc-name" $CONFIG)"-scenario
 

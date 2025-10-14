@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./env.sh
+source ../env.sh
 
 $PODMAN rm --ignore "$($YQ ".scenarios.app-outage.namespace" $CONFIG)"-application_outage
 

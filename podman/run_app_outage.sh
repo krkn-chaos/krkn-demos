@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./env.sh
+source ../env.sh
 
 export DURATION="$($YQ ".scenarios.app-outage.duration" $CONFIG)"
 export NAMESPACE="$($YQ ".scenarios.app-outage.namespace" $CONFIG)"

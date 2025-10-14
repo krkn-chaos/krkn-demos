@@ -1,5 +1,5 @@
 #!/bin/bash
-source ./env.sh
+source ../env.sh
 
 export CLOUD_TYPE="$($YQ ".scenarios.zone-outage.cloud-type" $CONFIG)"
 export DURATION="$($YQ ".scenarios.zone-outage.duration" $CONFIG)"

@@ -1,5 +1,5 @@
 #!/bin/bash
-source ./env.sh
+source ../env.sh
 PLAN_FILE=$(pwd)/$($YQ ".scenarios.service-hijacking.plan-file" $CONFIG)
 [ ! -f $PLAN_FILE ] && echo "plan file $PLAN_FILE not found" && exit 1
 $YQ -i ".service_target_port = $($YQ ".scenarios.service-hijacking.service-target-port" $CONFIG)" $PLAN_FILE

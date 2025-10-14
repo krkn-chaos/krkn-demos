@@ -1,5 +1,5 @@
 #!/bin/bash
-source ./env.sh
+source ../env.sh
 
 PLAN_FILE=$(pwd)/$($YQ ".scenarios.service-hijacking.plan-file" $CONFIG)
 

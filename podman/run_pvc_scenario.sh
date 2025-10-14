@@ -1,5 +1,5 @@
 #!/bin/bash
-source ./env.sh
+source ../env.sh
 
 export PVC_NAME="$($YQ ".scenarios.pvc-scenario.pvc-name" $CONFIG)"
 export POD_NAME="$($YQ ".scenarios.pvc-scenario.pod-name" $CONFIG)"

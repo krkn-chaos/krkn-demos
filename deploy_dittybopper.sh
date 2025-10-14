@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./env.sh
+source ../env.sh
 cd dittybopper
 source ./deploy.sh
 cd ..
