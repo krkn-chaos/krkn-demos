@@ -13,13 +13,13 @@ export PORTS="$($YQ ".scenarios.pod-network-filter.ports" $CONFIG)"
 export PROTOCOLS="$($YQ ".scenarios.pod-network-filter.protocols" $CONFIG)"
 
 
-$KRKNCTL run pod-network-filters \
+$KRKNCTL run pod-network-filter \
     --kubeconfig "../kubeconfig" \
     --namespace "$NAMESPACE"  \
     --pod-selector "$POD_LABEL"  \
     --instance-count "$INSTANCE_COUNT" \
-    --enable-alerts "True" \
-    --check-critical-alerts "True" \
+    --enable-alerts "$ENABLE_ALERTS" \
+    --check-critical-alerts "$CHECK_CRITICAL_ALERTS" \
     --health-check-url "$HEALTH_CHECK_URL" \
     --ingress "$INGRESS" \
     --egress "$EGRESS" \

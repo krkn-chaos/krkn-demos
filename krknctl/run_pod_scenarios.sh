@@ -14,8 +14,8 @@ $KRKNCTL run pod-scenarios \
     --namespace "$NAMESPACE"  \
     --pod-label "$POD_LABEL"  \
     --disruption-count "$DISRUPTION_COUNT" \
-    --enable-alerts "True" \
-    --check-critical-alerts "True" \
+    --enable-alerts "$ENABLE_ALERTS" \
+    --check-critical-alerts "$CHECK_CRITICAL_ALERTS" \
     --health-check-url "$HEALTH_CHECK_URL" \
     --expected-recovery-time "$EXPECTED_RECOVERY_TIME" 
 

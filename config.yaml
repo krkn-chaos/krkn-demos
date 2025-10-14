@@ -20,12 +20,15 @@ scenarios:
     duration: 60
     namespace: dittybopper
     pod-selector: "app=dittybopper"
+    enable-alerts: 'true'
+    check-critical-alerts: 'true'
     instance-count: 1
     ingress: True
     egress: False
     ports: 3000
     protocols: tcp
-
+    check:
+      service-url: ""
   node-outage:
     action: node_stop_start_scenario
     label-selector: 'node-role.kubernetes.io/master='
