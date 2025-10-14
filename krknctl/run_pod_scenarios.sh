@@ -7,7 +7,7 @@ export DISRUPTION_COUNT="$($YQ ".scenarios.pod-scenario.disruption-count" $CONFI
 export ENABLE_ALERTS="$($YQ ".scenarios.pod-scenario.enable-alerts" $CONFIG)"
 export CHECK_CRITICAL_ALERTS="$($YQ ".scenarios.pod-scenario.check-critical-alerts" $CONFIG)"
 export EXPECTED_RECOVERY_TIME="$($YQ ".scenarios.pod-scenario.expected-recovery-time" $CONFIG)"
-
+export HEALTH_CHECK_URL="$($YQ ".scenarios.pod-scenario.check.service-url" $CONFIG)"
 
 $KRKNCTL run pod-scenarios \
     --kubeconfig "../kubeconfig" \
@@ -16,5 +16,6 @@ $KRKNCTL run pod-scenarios \
     --disruption-count "$DISRUPTION_COUNT" \
     --enable-alerts "True" \
     --check-critical-alerts "True" \
+    --health-check-url "$HEALTH_CHECK_URL" \
     --expected-recovery-time "$EXPECTED_RECOVERY_TIME" 
 
