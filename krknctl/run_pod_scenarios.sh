@@ -8,5 +8,13 @@ export ENABLE_ALERTS="$($YQ ".scenarios.pod-scenario.enable-alerts" $CONFIG)"
 export CHECK_CRITICAL_ALERTS="$($YQ ".scenarios.pod-scenario.check-critical-alerts" $CONFIG)"
 export EXPECTED_RECOVERY_TIME="$($YQ ".scenarios.pod-scenario.expected-recovery-time" $CONFIG)"
 
-$PODMAN rm --ignore etcd-disruption
-$PODMAN run --name=etcd-disruption --net=host --env-host=true -v $KUBECONFIG:/home/krkn/.kube/config:Z  quay.io/krkn-chaos/krkn-hub:pod-scenarios
+
+$KRKNCTL run pod-scenarios \
+    --kubeconfig "../kubeconfig" \
+    --namespace "$NAMESPACE"  \
+    --pod-label "$POD_LABEL"  \
+    --disruption-count "$DISRUPTION_COUNT" \
+    --enable-alerts "True" \
+    --check-critical-alerts "True" \
+    --expected-recovery-time "$EXPECTED_RECOVERY_TIME" 
+
