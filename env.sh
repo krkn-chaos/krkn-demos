@@ -5,7 +5,7 @@ export PODMAN=$(which podman)
 export CURL=$(which curl)
 export KUBECONFIG=$(pwd)/kubeconfig
 export AWS=$(which aws)
-export CONFIG="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+export CONFIG="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )/config.yaml"
 export BASE64=$(which base64)
 export KRKNCTL=$(which krknctl)
 
@@ -18,6 +18,6 @@ export KRKNCTL=$(which krknctl)
 [ -z $CURL ] && echo "curl not found or not installed" && exit 1
 [ -z $AWS ] && echo "aws cli not found or not installed" && exit 1
 [ -z $BASE64 ] && echo "base64 not found or not installed" && exit 1
-[ -z $KRKNCTL] && echo "krknctl not found or not installed" && exit 1
+[ -z $KRKNCTL ] && echo "krknctl not found or not installed" && exit 1
 
 export WAIT_DURATION="$(yq ".scenarios.wait-duration" $CONFIG)"
