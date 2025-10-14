@@ -30,6 +30,8 @@ scenarios:
     enable-alerts: 'true'
     check-critical-alerts: 'true'
     expected-recovery-time: 30
+    check:
+      service-url: ""
   pvc-scenario:
     pvc-name: prometheus-data-prometheus-k8s-0
     pod-name: prometheus-k8s-0
