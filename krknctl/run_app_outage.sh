@@ -10,7 +10,7 @@ export POD_SELECTOR="$($YQ ".scenarios.app-outage.pod-selector" $CONFIG)"
 
 $KRKNCTL run application-outages \
     --kubeconfig ../kubeconfig \
-    --chaos-duration $DURATION \
-    --namespace $NAMESPACE \
-    --block-traffic-type $BLOCK_TRAFFIC_TYPE \
-    --pod-selector $POD_SELECTOR
+    --chaos-duration "$DURATION" \
+    --namespace "$NAMESPACE" \
+    --block-traffic-type "$BLOCK_TRAFFIC_TYPE" \
+    --pod-selector "$POD_SELECTOR"
