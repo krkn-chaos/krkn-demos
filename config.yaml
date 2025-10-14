@@ -20,8 +20,8 @@ scenarios:
     duration: 60
     namespace: dittybopper
     pod-selector: "app=dittybopper"
-    enable-alerts: 'true'
-    check-critical-alerts: 'true'
+    enable-alerts: 'True'
+    check-critical-alerts: 'True'
     instance-count: 1
     ingress: True
     egress: False

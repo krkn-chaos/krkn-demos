@@ -11,11 +11,14 @@ export INGRESS="$($YQ ".scenarios.pod-network-filter.ingress" $CONFIG)"
 export EGRESS="$($YQ ".scenarios.pod-network-filter.ingress" $CONFIG)"
 export PORTS="$($YQ ".scenarios.pod-network-filter.ports" $CONFIG)"
 export PROTOCOLS="$($YQ ".scenarios.pod-network-filter.protocols" $CONFIG)"
+export DURATION="$($YQ ".scenarios.pod-network-filter.duration" $CONFIG)"
 
 
 $KRKNCTL run pod-network-filter \
     --kubeconfig "../kubeconfig" \
     --namespace "$NAMESPACE"  \
+    --chaos-duration "$DURATION" \
+    --wait-duration "1" \
     --pod-selector "$POD_SELECTOR"  \
     --instance-count "$INSTANCE_COUNT" \
     --enable-alerts "$ENABLE_ALERTS" \
