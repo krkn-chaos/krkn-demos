@@ -16,6 +16,16 @@ scenarios:
     pod-selector: '{app: dittybopper}'
     check:
       service-url: ""
+  pod-network-filter:
+    duration: 60
+    namespace: dittybopper
+    pod-selector: "app=dittybopper"
+    instance-count: 1
+    ingress: True
+    egress: False
+    ports: 3000
+    protocols: tcp
+
   node-outage:
     action: node_stop_start_scenario
     label-selector: 'node-role.kubernetes.io/master='
