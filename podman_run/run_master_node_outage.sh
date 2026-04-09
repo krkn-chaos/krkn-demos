@@ -11,4 +11,4 @@ export AWS_DEFAULT_REGION="$($YQ ".aws.region" $CONFIG)"
 export AWS_ACCESS_KEY_ID="$($YQ ".aws.access-key-id" $CONFIG)"
 export AWS_SECRET_ACCESS_KEY="$($YQ ".aws.secret-access-key" $CONFIG)"
 $PODMAN rm --ignore  master-node-outage
-$PODMAN run --name=master-node-outage --net=host --env-host=true -v $KUBECONFIG:/home/krkn/.kube/config:Z quay.io/krkn-chaos/krkn-hub:node-scenarios
+$PODMAN run --name=master-node-outage --net=host --env-host=true -e WAIT_DURATION="$WAIT_DURATION" -v $KUBECONFIG:/home/krkn/.kube/config:Z quay.io/krkn-chaos/krkn-hub:node-scenarios

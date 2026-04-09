@@ -9,5 +9,5 @@ export AWS_DEFAULT_REGION="$($YQ ".scenarios.zone-outage.region" $CONFIG)"
 export AWS_ACCESS_KEY_ID="$($YQ ".aws.access-key-id" $CONFIG)"
 export AWS_SECRET_ACCESS_KEY="$($YQ ".aws.secret-access-key" $CONFIG)"
 
-$PODMAN rm --ignore zone-outages 
-$PODMAN run --name=zone-outages --net=host --env-host=true -v $KUBECONFIG:/home/krkn/.kube/config:Z quay.io/krkn-chaos/krkn-hub:zone-outages
+$PODMAN rm --ignore zone-outages
+$PODMAN run --name=zone-outages --net=host --env-host=true -e WAIT_DURATION="$WAIT_DURATION" -v $KUBECONFIG:/home/krkn/.kube/config:Z quay.io/krkn-chaos/krkn-hub:zone-outages

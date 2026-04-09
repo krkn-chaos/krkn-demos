@@ -4,15 +4,19 @@ This is a collection of scripts to easily demo krkn-hub scenarios. All the scena
 effort they could be ported to Kubernetes as well.
 
 There are three categories of scripts:
-- `run` scripts
-    - the scripts needed to run the scenarios
-- `check` scripts
+- `run` scripts — the scripts needed to run the scenarios, organized by runtime:
+    - `podman_run/` — runs scenarios via Podman (Linux)
+    - `krknctl_run/` — runs scenarios via the `krknctl` CLI
+    - `macos_run/` — runs scenarios via Podman on macOS (passes env vars explicitly since `--env-host` is unsupported)
+- `check` scripts (`check_scripts/`)
     - the scripts needed to show live the effects of the respective scenarios
 - service scripts
     - `login.sh`
         - performs the login in the OCP cluster
     - `deploy_dittybopper.sh`
-        - deploys in the cluster an example workload that can be targeted from different scenario (which settings are the default in the config.yaml)
+        - deploys in the cluster an example workload that can be targeted from different scenarios (settings are pre-configured in `config.yaml`)
+    - `env.sh`
+        - shared helper sourced by all run scripts; validates required tools and loads settings from `config.yaml`
 
 ## requirements 
 > [!WARNING]
@@ -28,6 +32,9 @@ To run these scripts, the following tools must be installed and available in the
 - `curl` command line http client [[GitHub repo](https://github.com/curl/curl)]
 - `aws` Amazon Webservice CLI tool [[GitHub repo](https://github.com/aws/aws-cli)]
 - `base64` base 64 encoder/decoder [[man page](https://ss64.com/bash/base64.html)]
+
+The `krknctl_run` scripts additionally require:
+- `krknctl` krkn CLI tool [[GitHub repo](https://github.com/krkn-chaos/krknctl)]
 
 > [!TIP]  
 > For a better demo experience, it is highly recommended to install `tmux` [[GitHub repo](https://github.com/tmux/tmux)] and use the vertical or horizontal split to run both the `run` and `check` scripts simultaneously. To do this, start `tmux`, then press `ctrl + b`, followed by `%` to split the screen vertically, or `"` to split it horizontally. To navigate between panes, use `ctrl + b` and the appropriate arrow key.
@@ -64,6 +71,8 @@ It includes global settings for the scenario, along with a sub-section containin
 - `pvc-scenario`
 - `service-hijacking`
 - `zone-outage`
+- `node-network-filter`
+- `kubevirt-outage`
 
 For an explanation of the specific scenario parameters, please refer to the [available scenarios](#available-scenarios) section below.
 
@@ -73,17 +82,19 @@ Some scenario-specific sub-sections include a `check` section, which is intended
 ## available scenarios
 
 The currently available scenarios, along with their corresponding check scripts, are:
-- [Application Outages](https://github.com/krkn-chaos/krkn-hub/blob/main/docs/application-outages.md) (`run_app_outage.sh`, `check_app_outage.sh`)
-- [Node Failures](https://github.com/krkn-chaos/krkn-hub/blob/main/docs/node-scenarios.md) (`run_master_node_outage.sh`, `check_master_node_outage.sh`)
-- [Pod Failures](https://github.com/krkn-chaos/krkn-hub/blob/main/docs/pod-scenarios.md) (`run_pod_scenarios.sh`, `run_pod_scenarios.sh`)
-- [PVC Disk Fill](https://github.com/krkn-chaos/krkn-hub/blob/main/docs/pvc-scenarios.md) (`run_pvc_scenario.sh`, `check_pvc_scenario.sh`)
-- [Service Hijacking](https://github.com/krkn-chaos/krkn-hub/blob/main/docs/service-hijacking.md) (`run_service_hijacking.sh`, `check_service_hijacking.sh`)
-- [Zone Outages](https://github.com/krkn-chaos/krkn-hub/blob/main/docs/zone-outages.md) (`run_zone_outage.sh`, `check_zone_outage.sh`)
+- [Application Outages](https://krkn-chaos.dev/docs/scenarios/application-outage/) (`run_app_outage.sh`, `check_app_outage.sh`)
+- [Node Failures](https://krkn-chaos.dev/docs/scenarios/node-scenarios/) (`run_master_node_outage.sh`, `check_master_node_outage.sh`)
+- [Node Network Filter](https://krkn-chaos.dev/docs/scenarios/network-chaos-ng-scenarios/node-network-filter/) (`run_node_network.sh`, `check_node_network.sh`)
+- [Pod Failures](https://krkn-chaos.dev/docs/scenarios/pod-scenario/) (`run_pod_scenarios.sh`, `check_pod_scenarios.sh`)
+- [PVC Disk Fill](https://krkn-chaos.dev/docs/scenarios/pvc-scenario/) (`run_pvc_scenario.sh`, `check_pvc_scenario.sh`)
+- [Service Hijacking](https://krkn-chaos.dev/docs/scenarios/service-hijacking-scenario/) (`run_service_hijacking.sh`, `check_service_hijacking.sh`)
+- [Zone Outages](https://krkn-chaos.dev/docs/scenarios/zone-outage-scenarios/) (`run_zone_outage.sh`, `check_zone_outage.sh`)
+- [KubeVirt Outage](https://krkn-chaos.dev/docs/scenarios/kubevirt-vm-outage-scenario/) (`run_kubevirt_outage.sh`, `check_kubevirt_outage.sh`)
 
 
 ## documentation
 
-These scripts serve as an example of how to run [Krkn-hub](https://github.com/krkn-chaos/krkn-hub) scenarios in an automated and reproducible manner. Feel free to open a PR with your suggestions for additional scenarios or use cases.
+These scripts serve as an example of how to run chaos scenarios in an automated and reproducible manner. The `podman_run/` and `macos_run/` scripts use [Krkn-hub](https://github.com/krkn-chaos/krkn-hub) container images directly via Podman, while `krknctl_run/` uses the `krknctl` CLI — the recommended approach for new users as it handles image pulling and parameter validation automatically. Feel free to open a PR with your suggestions for additional scenarios or use cases.
 
 For a complete overview of our chaos scenarios, please refer to our [chaos testing guide](https://krkn-chaos.github.io/krkn/), the [Krkn GitHub repository](https://github.com/krkn-chaos/krkn), the [Krkn-hub GitHub repository](https://github.com/krkn-chaos/krkn-hub), and the [Krkn website](https://krkn-chaos.dev).
 

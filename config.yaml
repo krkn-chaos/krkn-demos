@@ -8,7 +8,7 @@ aws:
   secret-access-key: test
   region: us-west-2
 scenarios:
-  wait-duration: 1
+  wait-duration: 30
   app-outage:
     duration: 60
     namespace: dittybopper
@@ -53,6 +53,31 @@ scenarios:
     vpc-id: vpc-051fc36b9e06a89b6
     subnet-id: subnet-02acbec1471595d2e
     region: us-west-2
+  node-network-filter:
+    duration: 100
+    node-name: ""
+    node-selector: 'node-role.kubernetes.io/worker='
+    namespace: default
+    instance-count: 1
+    execution: parallel
+    ingress: true
+    egress: true
+    interfaces: ""
+    ports: "6443"
+    protocols: tcp
+  kubevirt-outage:
+    namespace: virt-density
+    vm-name: ".*"
+    timeout: 60
+    kill-count: 1
+    virt-checks:
+      namespace: virt-density
+      name: ".*"
+      interval: 2
+      only-failures: false
+      disconnected: false
+      ssh-node: ""
+      exit-on-failure: false
 
 
 
