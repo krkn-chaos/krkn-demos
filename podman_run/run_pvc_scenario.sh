@@ -9,4 +9,4 @@ export DURATION="$($YQ ".scenarios.pvc-scenario.duration" $CONFIG)"
 
 
 $PODMAN rm --ignore  pvc-scenario
-$PODMAN run --name=pvc-scenario --net=host --env-host=true -v $KUBECONFIG:/home/krkn/.kube/config:Z quay.io/krkn-chaos/krkn-hub:pvc-scenarios
+$PODMAN run --name=pvc-scenario --net=host --env-host=true -e WAIT_DURATION="$WAIT_DURATION" -v $KUBECONFIG:/home/krkn/.kube/config:Z quay.io/krkn-chaos/krkn-hub:pvc-scenarios

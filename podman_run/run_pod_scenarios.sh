@@ -9,4 +9,4 @@ export CHECK_CRITICAL_ALERTS="$($YQ ".scenarios.pod-scenario.check-critical-aler
 export EXPECTED_RECOVERY_TIME="$($YQ ".scenarios.pod-scenario.expected-recovery-time" $CONFIG)"
 
 $PODMAN rm --ignore etcd-disruption
-$PODMAN run --name=etcd-disruption --net=host --env-host=true -v $KUBECONFIG:/home/krkn/.kube/config:Z  quay.io/krkn-chaos/krkn-hub:pod-scenarios
+$PODMAN run --name=etcd-disruption --net=host --env-host=true -e WAIT_DURATION="$WAIT_DURATION" -v $KUBECONFIG:/home/krkn/.kube/config:Z  quay.io/krkn-chaos/krkn-hub:pod-scenarios
